@@ -1,0 +1,7 @@
+{
+    "django.snippets.use": true,
+    "html.format.templating": true,
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    }
+}

@@ -1,0 +1,29 @@
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+        <body>
+                <h1>{{ evento.nome }}</h1>
+                <p>Categoria: {{ evento.categoria.nome }}</p>
+                <p>Local: {% firstof evento.local evento.link  %}</p>
+                {% if evento.date %}
+                    <p>Data: {{ evento.date | date:"d/m/y" }}</p>
+                {% else  %}
+                    <p>A definir</p>
+                {% endif %}
+                <p>Quantidade de participantes: {{ evento.participantes }}</p>
+
+                <form action="{% url 'participar' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="evento_id" value="{{ evento.id }}">
+                    <input type="submit" value="Participar">
+                </form>
+                
+                <p><a href="{% url 'index' %}">Ir para a listagem de eventos</a></p>
+        </body>
+    </html>
+{% endblock %}

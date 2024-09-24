@@ -1,0 +1,43 @@
+{% block content%}
+    <html>
+        <head>
+            <style>
+                table {
+                    border-collapse: collapse;
+                }
+
+                td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+            </style>
+        </head>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Local/Link</th>
+                    <th>Data</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in evento %}
+                    <tr>
+                        <td>{{event.nome}}</td>
+                        <td>{{event.categoria.nome}}</td>
+                        <td>{% firstof event.local event.link %}</td>
+                        {% if event.date %}
+                            <td>{{ event.date | date:"d/m/y" }}</td>
+                        {% else %}
+                            <td>A definir</td>
+                        {% endif %}
+                        <td><a href="{% url 'exibir_evento' event.id %}">Ver detalhes</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <html>
+{% endblock %}
