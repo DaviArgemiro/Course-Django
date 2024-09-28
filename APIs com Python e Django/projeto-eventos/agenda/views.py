@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse 
+from datetime import date
 
 from agenda.models import Evento
 
 # Create your views here.
 def index(request):
-    evento = Evento.objects.all().order_by('date')
+    evento = Evento.objects.exclude(
+        date__lt = date.today()
+    )
+    
     return render(request, 'agenda/listar_evento.html', {'evento': evento})
 
 def exibir_evento(request, id):
