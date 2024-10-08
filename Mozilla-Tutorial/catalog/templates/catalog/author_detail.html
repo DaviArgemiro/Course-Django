@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% block content %}
+    <body>
+        <h1>Author: {{author.last_name}}, {{author.first_name}}</h1>
+        <p>{{author.date_of_birth}} -</p>
+        <div style="margin-left:20px;margin-top:20px">
+            <h3>Books</h3>
+            {% for books in author.book_set.all %}
+                <a href="{{ books.get_absolute_url }}">{{books.tittle}}</a> ({{books.id}})
+                <p>{{books.summary}}</p>
+            {% endfor %}
+        </div>
+    </body>
+{% endblock  %}
+</html>

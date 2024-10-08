@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% block content %}
+
+    <body>
+        <h1>Author List</h1>
+        {% if author_list %}
+            <ul>
+                {% for authors in author_list %}
+                    <li>
+                        <a href="{{ authors.get_absolute_url }}">{{authors.last_name}}, {{authors.first_name}} ({{authors.date_of_birth}})</a>    
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Não tem autores</p>
+        {% endif %}
+    </body>
+
+{% endblock  %}
+</html>
